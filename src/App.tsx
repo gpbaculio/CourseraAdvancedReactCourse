@@ -38,26 +38,26 @@ function App() {
         <fieldset>
           <h2>Sign Up</h2>
           <div className='Field'>
-            <label>
+            <label htmlFor='firstName'>
               First name <sup>*</sup>
             </label>
-            <input placeholder='First name' />
+            <input id='firstName' placeholder='First name' />
           </div>
           <div className='Field'>
-            <label>Last name</label>
-            <input placeholder='Last name' />
+            <label htmlFor='firstName'>Last name</label>
+            <input id='firstName' placeholder='Last name' />
           </div>
           <div className='Field'>
-            <label>
+            <label htmlFor='email'>
               Email address <sup>*</sup>
             </label>
-            <input placeholder='Email address' />
+            <input id='email' placeholder='Email address' />
           </div>
           <div className='Field'>
-            <label>
+            <label htmlFor='password'>
               Password <sup>*</sup>
             </label>
-            <input placeholder='Password' />
+            <input id='password' placeholder='Password' />
           </div>
           <div className='Field'>
             <label>
