@@ -1,24 +1,80 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+
+import "./App.css";
+
+type MousePositionType = {
+  mousePosition: {
+    x: number;
+    y: number;
+  };
+};
+
+type MousePositionProps = {
+  render: ({ mousePosition }: MousePositionType) => JSX.Element;
+};
+
+const MousePosition = ({ render }: MousePositionProps) => {
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  useEffect(() => {
+    const handleMousePositionChange = (e: MouseEvent) => {
+      // Use e.clientX and e.clientY to access the mouse position on the screen
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMousePositionChange);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMousePositionChange);
+    };
+  }, []);
+
+  // What should be returned here?
+  return render({ mousePosition });
+};
+
+// This component should not receive any props
+const PanelMouseLogger = () => {
+  return (
+    <div className='BasicTracker'>
+      <p>Mouse position:</p>
+      <MousePosition
+        render={({ mousePosition }: MousePositionType) => (
+          <div className='Row'>
+            <span>x: {mousePosition.x}</span>
+            <span>y: {mousePosition.y}</span>
+          </div>
+        )}
+      />
+    </div>
+  );
+};
+
+// This component should not receive any props
+const PointMouseLogger = () => {
+  return (
+    <MousePosition
+      render={({ mousePosition }) => (
+        <p>
+          ({mousePosition.x}, {mousePosition.y})
+        </p>
+      )}
+    />
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <header className='Header'>Little Lemon Restaurant 🍕</header>
+      <PanelMouseLogger />
+      <PointMouseLogger />
     </div>
   );
 }
