@@ -1,4 +1,5 @@
-import React, { useEffect, useId, useRef } from "react";
+import { useId } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -8,6 +9,7 @@ import {
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
 import { Box, HStack } from "@chakra-ui/react";
+
 import "./Header.css";
 
 const socials = [
