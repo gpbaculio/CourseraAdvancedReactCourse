@@ -1,32 +1,35 @@
-import React from "react";
-
-function App() {
-  const [user, setUser] = React.useState<any>([]);
-
-  const fetchData = () => {
-    fetch("https://randomuser.me/api/?results=1")
-      .then((response) => response.json())
-      .then(
-        (userData) => setUser(userData),
-        (error) => {
-          console.log("Error", error);
-        }
-      );
+import { useState, useEffect, useRef } from "react";
+export default function App() {
+  const [day, setDay] = useState("Monday");
+  const prevDay = usePrevious(day);
+  const getNextDay = () => {
+    if (day === "Monday") {
+      setDay("Tuesday");
+    } else if (day === "Tuesday") {
+      setDay("Wednesday");
+    } else if (day === "Wednesday") {
+      setDay("Thursday");
+    } else if (day === "Thursday") {
+      setDay("Friday");
+    } else if (day === "Friday") {
+      setDay("Monday");
+    }
   };
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
-
-  return Object.keys(user).length > 0 ? (
+  return (
     <div style={{ padding: "40px" }}>
-      <h1>Customer data</h1>
-      <h2>Name: {user.results[0].name.first}</h2>
-      <img src={user.results[0].picture.large} alt='' />
+      <h1>
+        Today is: {day}
+        <br />
+        {prevDay && <span>Previous work day was: {prevDay}</span>}
+      </h1>
+      <button onClick={getNextDay}>Get next day</button>
     </div>
-  ) : (
-    <h1>Data pending...</h1>
   );
 }
-
-export default App;
+function usePrevious(val: string) {
+  const ref = useRef<string>();
+  useEffect(() => {
+    ref.current = val;
+  }, [val]);
+  return ref.current;
+}
