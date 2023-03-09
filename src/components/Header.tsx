@@ -52,7 +52,7 @@ const Header = () => {
     }
   };
 
-  const top = direction === "up" ? 0 : -200;
+  const top = direction === null ? 0 : direction === "up" ? 0 : -200;
 
   return (
     <Box
