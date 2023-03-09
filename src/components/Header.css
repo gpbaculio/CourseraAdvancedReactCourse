@@ -1,6 +1,9 @@
 .header-icon {
   margin-right: 14px;
 }
+.header-icon:last-of-type {
+  margin-right: 0;
+}
 
 #header-contactme,
 #header-projects {

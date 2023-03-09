@@ -64,7 +64,9 @@ const Header = () => {
           px={16}
           py={4}
           justifyContent='space-between'
-          alignItems='center'>
+          alignItems='center'
+          display='flex'
+          flexDirection={{ sm: "column", md: "row", lg: "row" }}>
           <nav>
             {/* Add social media links based on the `socials` data */}
             {socials.map(({ icon, url }, index) => (
@@ -78,7 +80,11 @@ const Header = () => {
             ))}
           </nav>
           <nav>
-            <HStack spacing={8}>
+            <HStack
+              mt={{ sm: 4 }}
+              spacing={8}
+              justifyContent='space-between'
+              alignItems='center'>
               {/* Add links to Projects and Contact me section */}
               <a id='header-projects' onClick={() => handleClick("projects")}>
                 Projects
