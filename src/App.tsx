@@ -53,6 +53,10 @@ function App() {
         setRole(target.value);
         break;
       }
+      case "password": {
+        setPassword({ value: target.value, isTouched: true });
+        break;
+      }
     }
   };
 
@@ -66,6 +70,7 @@ function App() {
               First name <sup>*</sup>
             </label>
             <input
+              required
               value={firstName}
               id='firstName'
               onChange={onChange}
@@ -86,6 +91,7 @@ function App() {
               Email address <sup>*</sup>
             </label>
             <input
+              required
               value={email}
               id='email'
               onChange={onChange}
@@ -96,13 +102,19 @@ function App() {
             <label htmlFor='password'>
               Password <sup>*</sup>
             </label>
-            <input id='password' onChange={onChange} placeholder='Password' />
+            <input
+              value={password.value}
+              required
+              id='password'
+              onChange={onChange}
+              placeholder='Password'
+            />
           </div>
           <div className='Field'>
             <label htmlFor='role'>
               Role <sup>*</sup>
             </label>
-            <select id='role' value={role} onChange={onChange}>
+            <select required id='role' value={role} onChange={onChange}>
               <option value='role'>Role</option>
               <option value='individual'>Individual</option>
               <option value='business'>Business</option>
