@@ -22,10 +22,32 @@ const LandingSection = () => {
   const { onOpen } = useAlertContext() as AlertContextType;
 
   const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {},
-    validationSchema: Yup.object({}),
+    initialValues: {
+      firstName: "",
+      email: "",
+      type: "",
+      comment: "",
+    },
+    onSubmit: (values) => {
+      submit("www.example.com", values);
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required("Required"),
+      email: Yup.string()
+        .email("Please enter a valid email address")
+        .required("Required"),
+      type: Yup.string(),
+      comment: Yup.string(),
+    }),
   });
+
+  useEffect(() => {
+    if (response) {
+      const { type, message } = response;
+
+      onOpen(type, message);
+    }
+  }, [response]);
 
   return (
     <FullScreenSection
@@ -38,37 +60,56 @@ const LandingSection = () => {
           Contact me
         </Heading>
         <Box p={6} rounded='md' w='100%'>
-          <form>
-            <VStack spacing={4}>
-              <FormControl isInvalid={false}>
-                <FormLabel htmlFor='firstName'>Name</FormLabel>
-                <Input id='firstName' name='firstName' />
-                <FormErrorMessage></FormErrorMessage>
-              </FormControl>
-              <FormControl isInvalid={false}>
-                <FormLabel htmlFor='email'>Email Address</FormLabel>
-                <Input id='email' name='email' type='email' />
-                <FormErrorMessage></FormErrorMessage>
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor='type'>Type of enquiry</FormLabel>
-                <Select id='type' name='type'>
-                  <option value='hireMe'>Freelance project proposal</option>
-                  <option value='openSource'>
-                    Open source consultancy session
-                  </option>
-                  <option value='other'>Other</option>
-                </Select>
-              </FormControl>
-              <FormControl isInvalid={false}>
-                <FormLabel htmlFor='comment'>Your message</FormLabel>
-                <Textarea id='comment' name='comment' height={250} />
-                <FormErrorMessage></FormErrorMessage>
-              </FormControl>
-              <Button type='submit' colorScheme='purple' width='full'>
-                Submit
-              </Button>
-            </VStack>
+          <form onSubmit={formik.handleSubmit}>
+            <fieldset disabled={isLoading}>
+              <VStack spacing={4}>
+                <FormControl
+                  isInvalid={formik.errors && !!formik.errors.firstName}>
+                  <FormLabel htmlFor='firstName'>Name</FormLabel>
+                  <Input
+                    id='firstName'
+                    name='firstName'
+                    onChange={formik.handleChange}
+                  />
+                  <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={formik.errors && !!formik.errors.email}>
+                  <FormLabel htmlFor='email'>Email Address</FormLabel>
+                  <Input
+                    id='email'
+                    name='email'
+                    type='email'
+                    onChange={formik.handleChange}
+                  />
+                  <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+                </FormControl>
+                <FormControl>
+                  <FormLabel htmlFor='type'>Type of enquiry</FormLabel>
+                  <Select id='type' name='type' onChange={formik.handleChange}>
+                    <option value='hireMe'>Freelance project proposal</option>
+                    <option value='openSource'>
+                      Open source consultancy session
+                    </option>
+                    <option value='other'>Other</option>
+                  </Select>
+                </FormControl>
+                <FormControl isInvalid={false}>
+                  <FormLabel htmlFor='comment'>Your message</FormLabel>
+                  <Textarea
+                    id='comment'
+                    name='comment'
+                    height={250}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors.comment ? (
+                    <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
+                  ) : null}
+                </FormControl>
+                <Button type='submit' colorScheme='purple' width='full'>
+                  Submit
+                </Button>
+              </VStack>
+            </fieldset>
           </form>
         </Box>
       </VStack>
