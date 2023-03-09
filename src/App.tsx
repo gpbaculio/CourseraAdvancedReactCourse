@@ -16,6 +16,7 @@ function App() {
     value: "",
     isTouched: false,
   });
+
   const [role, setRole] = useState("role");
 
   const getIsFormValid = () => {
@@ -32,6 +33,23 @@ function App() {
     clearForm();
   };
 
+  const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    switch (target.id) {
+      case "firstName": {
+        setFirstName(target.value);
+        break;
+      }
+      case "lastName": {
+        setLastName(target.value);
+        break;
+      }
+      case "email": {
+        setEmail(target.value);
+        break;
+      }
+    }
+  };
+
   return (
     <div className='App'>
       <form onSubmit={handleSubmit}>
@@ -41,23 +59,38 @@ function App() {
             <label htmlFor='firstName'>
               First name <sup>*</sup>
             </label>
-            <input id='firstName' placeholder='First name' />
+            <input
+              value={firstName}
+              id='firstName'
+              onChange={onChange}
+              placeholder='First name'
+            />
           </div>
           <div className='Field'>
-            <label htmlFor='firstName'>Last name</label>
-            <input id='firstName' placeholder='Last name' />
+            <label htmlFor='lastName'>Last name</label>
+            <input
+              value={lastName}
+              id='lastName'
+              onChange={onChange}
+              placeholder='Last name'
+            />
           </div>
           <div className='Field'>
             <label htmlFor='email'>
               Email address <sup>*</sup>
             </label>
-            <input id='email' placeholder='Email address' />
+            <input
+              value={email}
+              id='email'
+              onChange={onChange}
+              placeholder='Email address'
+            />
           </div>
           <div className='Field'>
             <label htmlFor='password'>
               Password <sup>*</sup>
             </label>
-            <input id='password' placeholder='Password' />
+            <input id='password' onChange={onChange} placeholder='Password' />
           </div>
           <div className='Field'>
             <label>
