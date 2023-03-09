@@ -72,10 +72,14 @@ function App() {
         break;
       }
       case "password": {
-        setPassword({ value: target.value, isTouched: true });
+        setPassword({ ...password, value: target.value });
         break;
       }
     }
+  };
+
+  const onPasswordInputBlur = () => {
+    setPassword({ ...password, isTouched: true });
   };
 
   return (
@@ -121,6 +125,7 @@ function App() {
               Password <sup>*</sup>
             </label>
             <input
+              onBlur={onPasswordInputBlur}
               value={password.value}
               required
               id='password'
