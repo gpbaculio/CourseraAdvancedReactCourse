@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { RadioGroup, RadioOption } from "./Radio";
+import { useState } from "react";
 
 function App() {
+  const [selected, setSelected] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h2>How did you hear about Little Lemon?</h2>
+      <RadioGroup onChange={setSelected} selected={selected}>
+        <RadioOption value='social_media'>Social Media</RadioOption>
+        <RadioOption value='friends'>Friends</RadioOption>
+        <RadioOption value='advertising'>Advertising</RadioOption>
+        <RadioOption value='other'>Other</RadioOption>
+      </RadioGroup>
+      <button disabled={!selected}>Submit</button>
     </div>
   );
 }
