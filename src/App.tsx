@@ -1,26 +1,86 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ReactNode } from "react";
+
+import "./App.css";
+import { ThemeContextType, ThemeProvider, useTheme } from "./ThemeContext";
+import Switch from "./Switch";
+
+type TitleProps = { children: ReactNode };
+const Title = ({ children }: TitleProps) => {
+  const { theme } = useTheme() as ThemeContextType;
+  return (
+    <h2
+      style={{
+        color: theme === "light" ? "black" : "white",
+      }}>
+      {children}
+    </h2>
+  );
+};
+
+type ParagraphProps = { children: ReactNode };
+const Paragraph = ({ children }: ParagraphProps) => {
+  const { theme } = useTheme() as ThemeContextType;
+  return (
+    <p
+      style={{
+        color: theme === "light" ? "black" : "white",
+      }}>
+      {children}
+    </p>
+  );
+};
+
+const Content = () => {
+  return (
+    <div>
+      <Paragraph>
+        We are a pizza loving family. And for years, I searched and searched and
+        searched for the perfect pizza dough recipe. I tried dozens, or more.
+        And while some were good, none of them were that recipe that would make
+        me stop trying all of the others.
+      </Paragraph>
+    </div>
+  );
+};
+
+const Header = () => {
+  return (
+    <header>
+      <Title>Little Lemon 🍕</Title>
+      <Switch />
+    </header>
+  );
+};
+
+const Page = () => {
+  return (
+    <div className='Page'>
+      <Title>When it comes to dough</Title>
+      <Content />
+    </div>
+  );
+};
 
 function App() {
+  const { theme } = useTheme() as ThemeContextType;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className='App'
+      style={{
+        backgroundColor: theme === "light" ? "white" : "black",
+      }}>
+      <Header />
+      <Page />
     </div>
   );
 }
 
-export default App;
+function Root() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
+}
+
+export default Root;
