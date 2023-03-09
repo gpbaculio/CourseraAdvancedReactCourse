@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useId, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -8,6 +8,7 @@ import {
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
 import { Box, HStack } from "@chakra-ui/react";
+import "./Header.css";
 
 const socials = [
   {
@@ -43,6 +44,7 @@ const Header = () => {
       });
     }
   };
+  const socialsId = useId();
 
   return (
     <Box
@@ -61,10 +63,27 @@ const Header = () => {
           py={4}
           justifyContent='space-between'
           alignItems='center'>
-          <nav>{/* Add social media links based on the `socials` data */}</nav>
+          <nav>
+            {/* Add social media links based on the `socials` data */}
+            {socials.map(({ icon, url }, index) => (
+              <a
+                className='header-icon'
+                href={url}
+                target='_blank'
+                key={`${index}-${socialsId}`}>
+                <FontAwesomeIcon icon={icon} size='2x' />
+              </a>
+            ))}
+          </nav>
           <nav>
             <HStack spacing={8}>
               {/* Add links to Projects and Contact me section */}
+              <a id='header-projects' onClick={() => handleClick("projects")}>
+                Projects
+              </a>
+              <a id='header-contact' onClick={() => handleClick("contact")}>
+                Contact Me
+              </a>
             </HStack>
           </nav>
         </HStack>

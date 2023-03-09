@@ -1,0 +1,8 @@
+.header-icon {
+  margin-right: 14px;
+}
+
+#header-contact,
+#header-projects {
+  cursor: pointer;
+}
