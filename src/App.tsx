@@ -6,11 +6,8 @@ import ContactMeSection from "./components/ContactMeSection";
 import Footer from "./components/Footer";
 import { AlertProvider } from "./context/alertContext";
 import Alert from "./components/Alert";
-import useFontAwesomeIcons from "./hooks/useFontAwesomeIcons";
 
 function App() {
-  useFontAwesomeIcons();
-
   return (
     <ChakraProvider>
       <AlertProvider>
