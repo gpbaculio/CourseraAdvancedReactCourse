@@ -116,7 +116,11 @@ function App() {
               id='password'
               onChange={onChange}
               placeholder='Password'
+              type='password'
             />
+            {password.isTouched && password.value.length < 8 ? (
+              <PasswordErrorMessage />
+            ) : null}
           </div>
           <div className='Field'>
             <label htmlFor='role'>
