@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+
 import { useFormik } from "formik";
 import {
   Box,
@@ -13,6 +14,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
+
 import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
 import { AlertContextType, useAlertContext } from "../context/alertContext";
@@ -23,6 +25,7 @@ const initialValues = {
   type: "",
   comment: "",
 };
+
 const validationSchema = Yup.object({
   firstName: Yup.string().required("Required"),
   email: Yup.string()
