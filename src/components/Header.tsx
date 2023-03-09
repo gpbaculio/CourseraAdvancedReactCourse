@@ -38,7 +38,6 @@ const socials = [
 const Header = () => {
   const handleClick = (anchor: string) => () => {
     const id = `${anchor}-section`;
-    console.log("id ", id);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
