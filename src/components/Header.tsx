@@ -81,7 +81,7 @@ const Header = () => {
               <a id='header-projects' onClick={() => handleClick("projects")}>
                 Projects
               </a>
-              <a id='header-contact' onClick={() => handleClick("contact")}>
+              <a id='header-contactme' onClick={() => handleClick("contactme")}>
                 Contact Me
               </a>
             </HStack>
