@@ -38,6 +38,7 @@ const socials = [
 const Header = () => {
   const handleClick = (anchor: string) => () => {
     const id = `${anchor}-section`;
+    console.log("id ", id);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -86,10 +87,16 @@ const Header = () => {
               justifyContent='space-between'
               alignItems='center'>
               {/* Add links to Projects and Contact me section */}
-              <a id='header-projects' onClick={() => handleClick("projects")}>
+              <a
+                href='/#projects-section'
+                id='header-projects'
+                onClick={handleClick("projects")}>
                 Projects
               </a>
-              <a id='header-contactme' onClick={() => handleClick("contactme")}>
+              <a
+                href='/#contact-me'
+                id='header-contactme'
+                onClick={handleClick("contactme")}>
                 Contact Me
               </a>
             </HStack>
