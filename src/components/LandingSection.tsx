@@ -1,7 +1,6 @@
 import React from "react";
 import { Avatar, Heading, VStack } from "@chakra-ui/react";
 import FullScreenSection from "./FullScreenSection";
-import useGetRequest from "../hooks/useGetRequest";
 
 const greeting = "Hello, I am Pete!";
 const bio1 = "A frontend developer";
