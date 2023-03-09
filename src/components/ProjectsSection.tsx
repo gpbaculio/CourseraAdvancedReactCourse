@@ -36,12 +36,13 @@ const ProjectsSection = () => {
       backgroundColor='#14532d'
       isDarkBackground
       p={8}
-      alignItems='flex-start'
+      id='projects-section'
       spacing={8}>
-      <Heading as='h1' id='projects-section'>
+      <Heading textAlign='center' as='h1' id='projects-section'>
         Featured Projects
       </Heading>
       <Box
+        alignItems='flex-start'
         display='grid'
         gridTemplateColumns='repeat(2,minmax(0,1fr))'
         gridGap={8}>
