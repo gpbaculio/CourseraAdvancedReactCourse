@@ -33,7 +33,9 @@ function App() {
     clearForm();
   };
 
-  const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     switch (target.id) {
       case "firstName": {
         setFirstName(target.value);
@@ -45,6 +47,10 @@ function App() {
       }
       case "email": {
         setEmail(target.value);
+        break;
+      }
+      case "role": {
+        setRole(target.value);
         break;
       }
     }
@@ -93,10 +99,10 @@ function App() {
             <input id='password' onChange={onChange} placeholder='Password' />
           </div>
           <div className='Field'>
-            <label>
+            <label htmlFor='role'>
               Role <sup>*</sup>
             </label>
-            <select>
+            <select id='role' value={role} onChange={onChange}>
               <option value='role'>Role</option>
               <option value='individual'>Individual</option>
               <option value='business'>Business</option>
