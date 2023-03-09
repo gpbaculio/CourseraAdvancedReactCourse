@@ -21,7 +21,16 @@ function App() {
 
   const getIsFormValid = () => {
     // Implement this function
-    return true;
+    if (
+      firstName &&
+      validateEmail(email) &&
+      password.value.length >= 8 &&
+      (role === "individual" || role === "business")
+    ) {
+      return true;
+    }
+
+    return false;
   };
 
   const clearForm = () => {
@@ -36,7 +45,8 @@ function App() {
     setRole("role");
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     alert("Account created!");
     clearForm();
   };
