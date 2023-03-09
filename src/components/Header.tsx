@@ -11,6 +11,7 @@ import {
 import { Box, HStack } from "@chakra-ui/react";
 
 import "./Header.css";
+import useScrollDirection from "../hooks/useScrollDirection";
 
 const socials = [
   {
@@ -36,6 +37,10 @@ const socials = [
 ];
 
 const Header = () => {
+  const socialsId = useId();
+
+  const direction = useScrollDirection();
+
   const handleClick = (anchor: string) => () => {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
@@ -46,12 +51,13 @@ const Header = () => {
       });
     }
   };
-  const socialsId = useId();
+
+  const top = direction === "up" ? 0 : -200;
 
   return (
     <Box
       position='fixed'
-      top={0}
+      top={top}
       left={0}
       right={0}
       translateY={0}
@@ -59,7 +65,7 @@ const Header = () => {
       transitionDuration='.3s'
       transitionTimingFunction='ease-in-out'
       backgroundColor='#18181b'>
-      <Box color='white' maxWidth='1280px' margin='0 auto'>
+      <Box color='white' maxWidth='1280px' margin='0 auto' alignItems='center'>
         <HStack
           px={16}
           py={4}
@@ -81,8 +87,9 @@ const Header = () => {
           </nav>
           <nav>
             <HStack
-              mt={{ sm: 4 }}
+              mt={{ sm: 4, md: 0 }}
               spacing={8}
+              display='flex'
               justifyContent='space-between'
               alignItems='center'>
               {/* Add links to Projects and Contact me section */}
