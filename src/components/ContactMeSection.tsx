@@ -17,28 +17,31 @@ import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
 import { AlertContextType, useAlertContext } from "../context/alertContext";
 
+const initialValues = {
+  firstName: "",
+  email: "",
+  type: "",
+  comment: "",
+};
+const validationSchema = Yup.object({
+  firstName: Yup.string().required("Required"),
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("Required"),
+  type: Yup.string(),
+  comment: Yup.string(),
+});
+
 const LandingSection = () => {
   const { isLoading, response, submit } = useSubmit();
   const { onOpen } = useAlertContext() as AlertContextType;
 
   const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      email: "",
-      type: "",
-      comment: "",
-    },
+    initialValues,
     onSubmit: (values) => {
       submit("www.example.com", values);
     },
-    validationSchema: Yup.object({
-      firstName: Yup.string().required("Required"),
-      email: Yup.string()
-        .email("Please enter a valid email address")
-        .required("Required"),
-      type: Yup.string(),
-      comment: Yup.string(),
-    }),
+    validationSchema,
   });
 
   useEffect(() => {
